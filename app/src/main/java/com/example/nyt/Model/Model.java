@@ -1,4 +1,4 @@
-package com.example.nyt;
+package com.example.nyt.Model;
 
 import java.util.ArrayList;
 

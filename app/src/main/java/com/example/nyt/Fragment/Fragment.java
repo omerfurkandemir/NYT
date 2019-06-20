@@ -1,4 +1,4 @@
-package com.example.nyt;
+package com.example.nyt.Fragment;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;

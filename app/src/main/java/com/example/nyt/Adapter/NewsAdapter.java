@@ -1,4 +1,4 @@
-package com.example.nyt;
+package com.example.nyt.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,12 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.example.nyt.Fragment.Sayfa2;
+import com.example.nyt.Model.Model;
+import com.example.nyt.MySingleton;
+import com.example.nyt.R;
+import com.example.nyt.Retrofit.Repo;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
 
     private Context ctx;
     private ArrayList<String> nList;
@@ -22,7 +28,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     private ImageLoader mImageLoader;
 
 
-    public Adapter(Context ctx, ArrayList<String> nList) {
+    public NewsAdapter(Context ctx, ArrayList<String> nList) {
         this.ctx = ctx;
         this.nList = nList;
         mySingleton = MySingleton.getInstance(ctx);
@@ -31,17 +37,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @NonNull
     @Override
-    public Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public NewsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view = LayoutInflater.from(ctx.getApplicationContext()).inflate(R.layout.single_item,viewGroup,false);
 
-        MyViewHolder myViewHolder = new MyViewHolder(view);
+        NewsAdapter.MyViewHolder myViewHolder = new NewsAdapter.MyViewHolder(view);
 
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final NewsAdapter.MyViewHolder myViewHolder, final int i) {
 
         final String model = nList.get(i);
 
@@ -49,6 +55,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         ArrayList<String> byline = Model.getByline();
         ArrayList<String> date = Model.getPublication_date();
         final ArrayList<String> img = Model.getSrc();
+
+
 
         myViewHolder.title.setText(headline.get(i));
         myViewHolder.byline.setText(byline.get(i));

@@ -1,28 +1,13 @@
 package com.example.nyt;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import java.util.ArrayList;
+import com.example.nyt.Fragment.Fragment;
+import com.example.nyt.Fragment.Sayfa1;
+import com.example.nyt.Fragment.Sayfa2;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-
     }
-
-
 
     private void setupViewPager(ViewPager viewPager){
         Fragment adapter = new Fragment(getSupportFragmentManager());

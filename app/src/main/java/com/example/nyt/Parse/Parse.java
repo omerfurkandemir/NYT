@@ -1,6 +1,6 @@
-package com.example.nyt;
+package com.example.nyt.Parse;
 
-import android.util.Log;
+import com.example.nyt.Model.Model;
 
 import org.json.JSONArray;
 import org.json.JSONException;

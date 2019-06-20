@@ -1,4 +1,4 @@
-package com.example.nyt;
+package com.example.nyt.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +19,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.nyt.Adapter.Adapter;
+import com.example.nyt.Model.Model;
+import com.example.nyt.Parse.Parse;
+import com.example.nyt.R;
 
 import java.util.ArrayList;
 
