@@ -14,11 +14,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.nyt.Fragment.Sayfa2;
 import com.example.nyt.Model.Model;
+import com.example.nyt.Model.News_Model;
 import com.example.nyt.MySingleton;
 import com.example.nyt.R;
 import com.example.nyt.Retrofit.Repo;
+import com.example.nyt.Retrofit.Result;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
 
@@ -39,7 +42,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
     @Override
     public NewsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(ctx.getApplicationContext()).inflate(R.layout.single_item,viewGroup,false);
+        View view = LayoutInflater.from(ctx.getApplicationContext()).inflate(R.layout.news_item,viewGroup,false);
 
         NewsAdapter.MyViewHolder myViewHolder = new NewsAdapter.MyViewHolder(view);
 
@@ -49,26 +52,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final NewsAdapter.MyViewHolder myViewHolder, final int i) {
 
-        final String model = nList.get(i);
+        //final String model = nList.get(i);
 
-        ArrayList<String> headline = Model.getHeadline();
-        ArrayList<String> byline = Model.getByline();
-        ArrayList<String> date = Model.getPublication_date();
-        final ArrayList<String> img = Model.getSrc();
+        ArrayList<String> section = News_Model.getSection();
+        ArrayList<String> title = News_Model.getTitle();
+        ArrayList<String> byline = News_Model.getByline();
+        final ArrayList<String> img = News_Model.getUrl();
 
-
-
-        myViewHolder.title.setText(headline.get(i));
+        myViewHolder.title.setText(title.get(i));
         myViewHolder.byline.setText(byline.get(i));
-        myViewHolder.date.setText(date.get(i));
+        myViewHolder.date.setText(section.get(i));
 
-        String img_url = img.get(i);
+        final String img_url = img.get(i);
 
         if(img_url!= null){
             mImageLoader.get(img_url, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                    myViewHolder.image.setImageBitmap(response.getBitmap());
+                        myViewHolder.image.setImageBitmap(response.getBitmap());
                 }
 
                 @Override

@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.nyt.Adapter.Adapter;
+import com.example.nyt.Adapter.NumberAdapter;
 import com.example.nyt.Model.Model;
 import com.example.nyt.Parse.Parse;
 import com.example.nyt.R;
@@ -31,10 +34,11 @@ public class Sayfa1 extends Fragment {
     private static final String TAG = "Sayfa1";
 
     private String url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=name&api-key=2hfqKd3QI7m64EKQ0LIDFCkFCIVrMZNe" ;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, number;
     private ArrayList<Model> mList = new ArrayList<>();
 
     private Adapter myAdapter;
+    private NumberAdapter nmAdapter;
 
     EditText editText;
     Button search;
@@ -47,6 +51,8 @@ public class Sayfa1 extends Fragment {
 
         editText = (EditText) view.findViewById(R.id.edtext);
         search = (Button) view.findViewById(R.id.btn_searh);
+        recyclerView = (RecyclerView) view.findViewById(R.id.main_list);
+        number = (RecyclerView) view.findViewById(R.id.number_rv);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,9 +63,10 @@ public class Sayfa1 extends Fragment {
                 vget();
             }
         });
-        recyclerView = (RecyclerView) view.findViewById(R.id.main_list);
 
         vget();
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView (recyclerView);
 
         return view;
     }
@@ -70,16 +77,19 @@ public class Sayfa1 extends Fragment {
             public void onResponse(String response) {
                 Log.d("snow", response.toString());
                 Parse parse = new Parse(response);
-                //ArrayList<String> deneme = Model.getSrc();
-                //String de = deneme.get(0);
-                //String de1 = Model.getStatus();
-                //String de12 = de1;
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
                 recyclerView.setHasFixedSize(true);
 
+
                 myAdapter = new Adapter(getActivity().getApplicationContext(), Model.getDisplay_title());
                 recyclerView.setAdapter(myAdapter);
+
+                number.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                number.setHasFixedSize(true);
+
+                nmAdapter = new NumberAdapter(getActivity().getApplicationContext(), Model.getDisplay_title());
+                number.setAdapter(nmAdapter);
 
             }
         }, new Response.ErrorListener() {
