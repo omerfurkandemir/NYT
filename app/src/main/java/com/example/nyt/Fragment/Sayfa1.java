@@ -89,7 +89,7 @@ public class Sayfa1 extends Fragment {
                 number.setHasFixedSize(true);
 
                 nmAdapter = new NumberAdapter(getActivity().getApplicationContext(), Model.getDisplay_title());
-                number.setAdapter(nmAdapter);
+                //number.setAdapter(nmAdapter);
 
             }
         }, new Response.ErrorListener() {

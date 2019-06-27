@@ -68,7 +68,7 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.MyViewHold
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.number);
+            title = (TextView) itemView.findViewById(R.id.number1);
 
         }
     }
